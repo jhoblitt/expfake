@@ -15,6 +15,7 @@ REMOTE_CMD="./expfake/expfake \
 for i in {1..10}; do
   host=$(printf 'lsstcam-dc%02d' "$i")
   echo "[$host] starting …"
+  # shellcheck disable=SC2029
   ssh "$host" "$REMOTE_CMD" &
 done
 
