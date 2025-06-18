@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/rand"
 	"flag"
+	"fmt"
 	"io"
 	"log"
 	"os"
@@ -10,6 +11,7 @@ import (
 
 	"github.com/jhoblitt/expfake/filesizes"
 	"github.com/jhoblitt/expfake/hostmap"
+	"github.com/jhoblitt/expfake/version"
 )
 
 func main() {
@@ -17,7 +19,13 @@ func main() {
 	hostMapPath := flag.String("hostmap", "hostmap.yaml", "Path to the hostmap file")
 	fileSizesPath := flag.String("filesizes", "filesizes.yaml", "Path to the file sizes file")
 	outputDir := flag.String("dir", "", "Path to the directory to write files to")
+	versionFlag := flag.Bool("version", false, "print version and exit")
 	flag.Parse()
+
+	if *versionFlag {
+		fmt.Println(version.Version)
+		os.Exit(0)
+	}
 
 	if *hostName == "" {
 		log.Fatal("hostname flag is required")
