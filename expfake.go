@@ -55,6 +55,7 @@ func main() {
 	}
 
 	// create output directory if it doesn't exist
+	//nolint:gosec // G301: Expect directory permissions to be 0750 or less
 	if err := os.MkdirAll(*outputDir, 0o755); err != nil {
 		log.Fatalf("mkdir %s: %v", *outputDir, err)
 	}
@@ -69,6 +70,7 @@ func main() {
 		totalSize += size
 
 		fullFilePath := filepath.Join(*outputDir, file)
+		//nolint:gosec // G304: Potential file inclusion via variable (gosec)
 		f, err := os.Create(fullFilePath)
 		if err != nil {
 			log.Fatalf("Error creating file %s: %v", file, err)
